@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><i class="oi oi-caret-right"></i>
+						<span th:text="#{teatro.cadastrar.label}"></span></li>
+				</ul>
+			</div>
+			<a class="btn btn-primary btn-md" th:href="@{/teatros/listar}"
+				role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
+				aria-hidden="true"></span> <span th:text="#{teatro.listar.label}"></span>
+			</a>
+		</nav>
+
+		<div class="container" id="cadastro">
+
+			<div th:replace="fragments/alert"></div>
+
+			<form
+				th:action="${theater.id == null} ? @{/teatros/salvar} : @{/teatros/editar}"
+				th:object="${theater}" method="POST">
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+                        <label th:text="#{teatro.email.label}" for="email"></label> 
+						<input type="text" class="form-control" id="email" placeholder="fulano@ciclano.com"
+							autofocus="autofocus" th:field="*{email}"
+							th:classappend="${#fields.hasErrors('email')} ? is-invalid" />
+						<div class="invalid-feedback">
+							<span th:errors="*{email}"></span>
+                        </div>
+					</div>
+
+					<div class="form-group col-md-6">
+                        <label th:text="#{teatro.password.label}" for="password"></label>
+						<input type="password" class="form-control" id="password" 
+							autofocus="autofocus" th:field="*{password}"
+							th:classappend="${#fields.hasErrors('password')} ? is-invalid"/>
+						<div class="invalid-feedback">
+							<span th:errors="*{password}"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        <label th:text="#{teatro.name.label}" for="name"></label> 
+						<input type="text" class="form-control" id="name" placeholder="Fulano"
+							autofocus="autofocus" th:field="*{name}"
+							th:classappend="${#fields.hasErrors('name')} ? is-invalid" />
+						<div class="invalid-feedback">
+							<span th:errors="*{name}"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        <label th:text="#{teatro.cnpj.label}" for="cnpj"></label> 
+						<input type="text" class="form-control" id="cnpj" placeholder="__.___.___/____-__"
+							data-mask="00.000.000/0000-00" data-mask-reverse="true"
+							autofocus="autofocus" th:field="*{cnpj}"
+							th:classappend="${#fields.hasErrors('cnpj')} ? is-invalid" />
+						<div class="invalid-feedback">
+							<span th:errors="*{cnpj}"></span>
+                        </div>
+                    </div>
+
+
+					<div class="form-group col-md-6">
+						<label th:text="#{teatro.city.label}" for="city"></label> 
+						<select id="city" class="form-control" th:field="*{city}"
+							th:classappend="${#fields.hasErrors('city')} ? is-invalid">
+							<option value="">Selecione</option>
+							<option th:each="city : ${cidades}" th:value="${city.id}"
+								th:text="${city.name}"></option>
+						</select>
+					
+						<div class="invalid-feedback">
+							<span th:errors="*{city}"></span>
+						</div>
+					</div>
+					
+				</div>
+				
+				<input type="hidden" id="id" th:field="*{id}" />
+				<button type="submit" th:text="#{button.salvar.label}"
+					class="btn btn-primary btn-sm"></button>
+			</form>
+		</div>
+		
+	</section>
+</body>
+</html>

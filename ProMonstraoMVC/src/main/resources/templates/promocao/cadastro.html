@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+
+<script>
+Array.prototype.forEach.call(document.body.querySelectorAll("*[data-mask]"), applyDataMask);
+
+function applyDataMask(field) {
+    var mask = field.dataset.mask.split('');
+    
+    // For now, this just strips everything that's not a number
+    function stripMask(maskedData) {
+        function isDigit(char) {
+            return /\d/.test(char);
+        }
+        return maskedData.split('').filter(isDigit);
+    }
+    
+    // Replace `_` characters with characters from `data`
+    function applyMask(data) {
+        return mask.map(function(char) {
+            if (char != '_') return char;
+            if (data.length == 0) return char;
+            return data.shift();
+        }).join('')
+    }
+    
+    function reapplyMask(data) {
+        return applyMask(stripMask(data));
+    }
+    
+    function changed() {   
+        var oldStart = field.selectionStart;
+        var oldEnd = field.selectionEnd;
+        
+        field.value = reapplyMask(field.value);
+        
+        field.selectionStart = oldStart;
+        field.selectionEnd = oldEnd;
+    }
+    
+    field.addEventListener('click', changed)
+    field.addEventListener('keyup', changed)
+}
+</script>
+
+</head>
+<body>
+
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><i class="oi oi-caret-right"></i>
+						<span th:text="#{promotion.cadastrar.label}"></span></li>
+				</ul>
+			</div>
+			<a	class="btn btn-primary btn-md" th:href="@{/promocoes/listar}"
+				role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
+				aria-hidden="true"></span> <span th:text="#{promotion.listar.label}"></span>
+			</a>
+		</nav>
+
+		<div class="container" id="cadastro" >
+
+			<div th:replace="fragments/alert"></div>
+
+			<form
+				th:action="${sale.id == null} ? @{/promocoes/salvar} : @{/promocoes/editar}"
+				th:object="${sale}" method="POST">
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+                        <label th:text="#{promotion.playName.label}" for="playName"></label> 
+						<input required="required" type="text" class="form-control" id="playName" placeholder="Peça XXXXX YYYYY"
+							autofocus="autofocus" th:field="*{playName}" 
+							th:classappend="${#fields.hasErrors('playName')} ? is-invalid" />
+						<div class="invalid-feedback">
+							<span th:errors="*{playName}"></span>
+                        </div>
+					</div>
+
+					<div class="form-group col-md-6">
+						<label th:text="#{promotion.price.label}" for="price"></label> 
+						<input required="required" type="text" class="form-control" id="price" placeholder="Preco do ingresso"
+							data-mask="00.00" data-mask-reverse="true" th:field="*{price}" 
+							th:classappend="${#fields.hasErrors('price')} ? is-invalid" />
+						
+						<div class="invalid-feedback">
+							<span th:errors="*{price}"></span>
+						</div>
+					</div>
+                    
+                    <div class="form-group col-md-6">
+                        <label th:text="#{promotion.date.label}" for="date"></label> 
+						<input required="required" type="datetime-local" class="form-control" id="date"
+							autofocus="autofocus"  
+							placeholder = "YYYY-MM-DD HH:MM:SS"
+							th:field="*{date}" 
+							th:classappend="${#fields.hasErrors('date')} ? is-invalid" />
+						<div class="invalid-feedback">
+							<span th:errors="*{date}"></span>
+                        </div>
+					</div>
+					
+					<div class="form-group col-md-6">
+						<label th:text="#{promocao.website.label}" for="website"></label> 
+						<select id="website" class="form-control" th:field="*{website}" 
+							th:classappend="${#fields.hasErrors('website')} ? is-invalid" required>
+							<!-- <option value="" disabled selected>Select your option</option>  -->
+							<option value="">Selecione</option>
+							<option th:each="website : ${websites}" th:value="${website.id}"
+								th:text="${website.name}"></option>
+						</select>
+					
+						<div class="invalid-feedback">
+							<span th:errors="*{website}"></span>
+						</div>
+					</div>
+
+				</div>
+				<input type="hidden" id="id" th:field="*{id}" />
+				
+				
+				<button type="submit" th:text="#{button.salvar.label}"
+					class="btn btn-primary btn-sm"> 
+				</button>
+			</form>
+		</div>
+	</section>
+</body>
+</html>
