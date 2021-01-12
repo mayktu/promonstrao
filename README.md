@@ -2,11 +2,11 @@
 
 Implementação do projeto ProMonstrao usando Servlets e JSP
 
-# ProMonstraoMVC
+## ProMonstraoMVC
 
 Implementação do projeto ProMonstrao usando Spring MVC
 
-# ProMonstraoREST
+## ProMonstraoREST
 
 Implementação do projeto ProMonstrao utilizando REST API
 
