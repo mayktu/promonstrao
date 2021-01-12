@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<i class="oi oi-caret-right"></i>
+						<span th:text="#{teatro.listar.label}"></span>
+					</li>
+				</ul>
+				<a class="btn btn-primary btn-md" th:href="@{/teatros/cadastrar}" role="button" sec:authorize="hasAuthority('ADMIN')"> 
+					<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
+					<span th:text="#{teatro.cadastrar.label}"></span>
+				</a>
+			</div>
+		</nav>
+
+		<div class="container" id="listagem">
+
+			<div th:replace="fragments/alert"></div>
+
+			<div class="table-responsive">
+				<table class="table table-striped table-hover table-sm">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th th:text="#{teatro.nome.label}"></th>
+							<th sec:authorize="hasAuthority('ADMIN')" th:text="#{teatro.email.label}"></th>
+							<th th:text="#{teatro.cnpj.label}"></th>
+							<th th:text="#{teatro.cidade.label}"></th>
+							<th sec:authorize="hasAuthority('ADMIN')">#</th>
+							<th th:text="#{acao.label}" sec:authorize="hasAuthority('ADMIN')"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="teatro : ${teatros}">
+							<td th:text="${teatro.id}"></td>
+							<td th:text="${teatro.name}"></td>
+							<td sec:authorize="hasAuthority('ADMIN')" th:text="${teatro.email}"></td>
+							<td th:text="${teatro.cnpj}"></td>
+							<td th:text="${teatro.city.name}"></td>
+							<td th:text="${teatro.id}" sec:authorize="hasAuthority('ADMIN')"></td>
+							<td colspan="2">
+								<a class="btn btn-info btn-sm" th:href="@{/teatros/editar/{id} (id=${teatro.id}) }"
+									role="button" sec:authorize="hasAuthority('ADMIN')"> 
+									<span class="oi oi-brush" th:title="#{link.editar.label}" aria-hidden="true"> </span>
+								</a>
+								<button 
+									th:id="${'btn_teatros/excluir/' + teatro.id}"
+									type="button" class="btn btn-danger btn-sm"
+									data-toggle="modal" data-target="#myModal" sec:authorize="hasAuthority('ADMIN')">
+									<span class="oi oi-circle-x" th:title="#{link.excluir.label}" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div th:replace="fragments/modal :: modal"></div>
+	</section>
+</body>
+</html>

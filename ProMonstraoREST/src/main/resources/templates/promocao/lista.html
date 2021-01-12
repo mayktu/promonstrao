@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<i class="oi oi-caret-right"></i>
+						<span th:text="#{promotion.listar.label}"></span>
+					</li>
+				</ul>
+				<a sec:authorize="hasAuthority('THEATER')" class="btn btn-primary btn-md" th:href="@{/promocoes/cadastrar}" role="button"> 
+					<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
+					<span th:text="#{promotion.cadastrar.label}"></span>
+				</a>
+			</div>
+		</nav>
+
+		<div class="container" id="listagem">
+
+			<div th:replace="fragments/alert"></div>
+
+			<div class="table-responsive">
+				<table class="table table-striped table-hover table-sm">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th th:text="#{promotion.nome.label}"></th>
+							<th th:text="#{promotion.preco.label}"></th>
+							<th th:text="#{promotion.data.label}"></th>
+							<th th:text="#{promotion.nomeSite.label}"></th>							
+							<th th:text="#{promotion.nomeTeatro.label}"></th>																					
+							<th th:text="#{acao.label}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="promotion : ${promotions}">
+							<td th:text="${promotion.id}"></td>
+							<td th:text="${promotion.playName}"></td>
+							<td th:text="${promotion.price}"></td>
+							<td th:text="${promotion.date}"></td>
+							<td th:text="${promotion.website.name}"></td>
+							<td th:text="${promotion.theater.name}"></td>										
+							<td colspan="2">
+								<a  sec:authorize="hasAuthority('THEATER')" class="btn btn-info btn-sm" th:href="@{/promocoes/editar/{id} (id=${promotion.id}) }"
+									role="button"> 
+									<span class="oi oi-brush" th:title="#{link.editar.label}" aria-hidden="true"> </span>
+								</a>
+								<button sec:authorize="hasAuthority('THEATER')"
+									th:id="${'btn_promocoes/excluir/' + promotion.id}"
+									type="button" class="btn btn-danger btn-sm"
+									data-toggle="modal" data-target="#myModal">
+									<span class="oi oi-circle-x" th:title="#{link.excluir.label}" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div th:replace="fragments/modal :: modal"></div>
+	</section>
+</body>
+</html>

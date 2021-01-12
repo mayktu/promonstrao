@@ -1,0 +1,31 @@
+
+DIV para Preço
+
+<div class="form-group col-md-6">
+    <label th:text="#{teatro.preco.label}" for="preco"></label> 
+    <input type="text" class="form-control" id="preco" placeholder="Preço"
+        data-mask="000000,00" data-mask-reverse="true" th:field="*{preco}" 
+        th:classappend="${#fields.hasErrors('preco')} ? is-invalid" />
+    
+    <div class="invalid-feedback">
+        <span th:errors="*{preco}"></span>
+    </div>
+</div>
+
+
+DIV COM SELECAO
+
+<div class="form-group col-md-6">
+    <label th:text="#{teatro.city.label}" for="city"></label> 
+    <select id="city" class="form-control" th:field="*{city}"
+        th:classappend="${#fields.hasErrors('city')} ? is-invalid">
+        <option value="">Selecione</option>
+        <option th:each="city : ${city}" th:value="${city.id}"
+            th:text="${city.nome}"></option>
+    </select>
+
+    <div class="invalid-feedback">
+        <span th:errors="*{city}"></span>
+    </div>
+</div>
+
