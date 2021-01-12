@@ -1,6 +1,6 @@
-# ProMonstraoREST
+# ProMonstraoMVC
 
-Implementação do projeto ProMonstrao utilizando REST API
+Implementação do projeto ProMonstrao usando Spring MVC
 
 ### Requisitos do Trabalho
 
@@ -11,7 +11,7 @@ Implementação do projeto ProMonstrao utilizando REST API
 
 ### Tecnologia utilizada
 
-- Spring MVC (Controladores REST), Spring Data JPA, Spring Security & Thymeleaf (Lado Servidor)
+- Spring MVC, Spring Data JPA, Spring Security & Thymeleaf (Lado Servidor)
 - Javascript & CSS (Lado Cliente)
 
 ### Arquitetura utilizada
@@ -40,62 +40,45 @@ senha
 
 ### Implementação Requisitos
 
-Cria um novo site de vendas de ingressos [Create - CRUD]:<br>
+R1:<br>
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
 
-Retorna a lista de sites de vendas de ingressos [Read - CRUD]:<br>
+R2:<br>
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
 
-Retorna o site de vendas de ingressos de id = {id} [Read - CRUD]:<br>
+R3:<br>
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
 
-Atualiza o site de vendas de ingressos de id = {id} [Update - CRUD]:<br>
+R4:<br>
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
 
-Remove o site de vendas de ingressos de id = {id} [Delete - CRUD]:<br>
+R5:<br>
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
 
-Cria uma novo teatro [Create - CRUD]:<br>
+R6:<br>
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
 
-Retorna a lista de teatros [Read - CRUD]:<br>
+R7:<br>
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
 
-Retorna o teatro de id = {id} [Read - CRUD]:<br>
+R8:<br>
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
 
-Retorna a lista de todos os teatros da cidade de nome = {nome}:<br>
+R9:<br>
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
 
-Atualiza o teatro de id = {id} [Update - CRUD]:<br>
+R10:<br>
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
 
-Remove o teatro de id = {id} [Delete - CRUD]:<br>
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
-Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
+<hr>
 
-REST API -- Retorna a lista de promoções [Read - CRUD]:<br>
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
-Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
-
-REST API -- Retorna a promoção de id = {id} [Read - CRUD]:<br>
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
-Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
-
-REST API -- Retorna a lista de promoções do site de id = {id} [Read - CRUD]:<br>
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
-Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
-
-REST API -- Retorna a lista de promoções do teatro de id = {id} [Read - CRUD]:<br>
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
-Divisão na implementação da funcionalidade: Gabriel e Mayk<br>
